@@ -1,5 +1,14 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'gcr.io/tenseconds-b5f56/quickstart-image', '.' ]
-images:
-- 'gcr.io/tenseconds-b5f56/quickstart-image'
+    # build the container image
+    - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/tenseconds-b5f56/hello-cloud-run', '.']
+    # push the container image to Container Registry
+    - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/tenseconds-b5f56/hello-cloud-run']
+    # deploy container image to Cloud Run
+    - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['beta', 'run', 'deploy', 'hello-cloud-run', '--image', 'gcr.io/tenseconds-b5f56/hello-cloud-run', '--region', 'us-central1', '--allow-unauthenticated']
+    env:
+    - 'PORT=8080'
+    images:
+    - gcr.io/tenseconds-b5f56/hello-cloud-run
