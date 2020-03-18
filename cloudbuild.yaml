@@ -1,8 +1,4 @@
 steps:
   # Install
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install']
-      
-  # Deploy
-  - name: 'gcr.io/tenseconds-b5f56/nodeapp'
-    args: ['app', 'deploy']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/tenseconds-b5f56/nodeapp', '.']
