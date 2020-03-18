@@ -2,4 +2,5 @@ steps:
   # Install
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/tenseconds-b5f56/nodeapp', '.']
-images: ['gcr.io/tenseconds-b5f56/nodeapp']
+images:
+  - 'gcr.io/tenseconds-b5f56/nodeapp'
